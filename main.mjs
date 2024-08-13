@@ -1,22 +1,18 @@
 import express from "express";
 import cors from "cors";
-import mysql from "mysql2";
+import managerRouter from "./routes/manager.router.mjs";
+import employeeRouter from "./routes/employee.router.mjs";
+import dotenv from "dotenv";
+dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "employee",
-});
-
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.status(200).json({ msg: "welcome to our api" });
-});
+app.use("/manager", managerRouter);
+app.use("/employee", employeeRouter);
 
 app.listen(PORT, () => {
   console.log("server is running on port " + PORT);
