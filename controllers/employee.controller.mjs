@@ -105,6 +105,13 @@ const updateEmployee = async (req, res) => {
     num_of_ot_hours,
     // จำนวนเงิน OT ต่อชั่วโมง
     ot_per_hour,
+    //ค่ากะ
+    shift_fee,
+    //เบอร์ติดต่อ
+    phone_number,
+    //อีเมลล์
+    email,
+    line,
   } = req.body;
   if (!fname) {
     return res.status(400).json({ msg: "กรุณากรอก ชื่อจริง พนักงาน" });
@@ -124,9 +131,15 @@ const updateEmployee = async (req, res) => {
       num_of_work_date,
       num_of_ot_hours,
       ot_per_hour,
+      shift_fee,
       ot_summary: ot_per_hour * num_of_ot_hours,
+      phone_number,
+      line,
+      email,
       total_salary:
-        wage_per_date * num_of_work_date + ot_per_hour * num_of_ot_hours,
+        (wage_per_date * num_of_work_date) +
+        (ot_per_hour * num_of_ot_hours) +
+        shift_fee
     },
     { where: { id: employeeId } }
   );

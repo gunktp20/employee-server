@@ -20,6 +20,18 @@ const Employee = sequelize.define("employee", {
     type: DataTypes.STRING(40),
     allowNull: false,
   },
+  line: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  phone_number: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   wage_per_date: {
     type: DataTypes.INTEGER(11),
     allowNull: true,
@@ -45,6 +57,11 @@ const Employee = sequelize.define("employee", {
     allowNull: true,
     defaultValue: null,
   },
+  shift_fee:{
+    type: DataTypes.INTEGER(11),
+    allowNull: true,
+    defaultValue: null,
+  },
   total_salary: {
     type: DataTypes.INTEGER(11),
     allowNull: true,
@@ -56,7 +73,7 @@ const Employee = sequelize.define("employee", {
   },
 });
 
-Employee.sync({ force: true })
+Employee.sync({ force: false })
   .then(() => {
     console.log("Employee Table created !");
   })
